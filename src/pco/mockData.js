@@ -35,6 +35,8 @@ export const PEOPLE = Array.from({ length: 120 }, (_, i) => {
     name,
     email: `${name.toLowerCase().replace(/[^a-z]+/g, ".")}@example.com`,
     joinedYear: 2015 + Math.floor(rand() * 11),
+    // month 1-12, day 1-28 (kept simple), for the Birthdays & Milestones tool
+    birthday: { month: 1 + Math.floor(rand() * 12), day: 1 + Math.floor(rand() * 28) },
   };
 });
 
@@ -84,3 +86,33 @@ function buildAttendance() {
   return out.reverse(); // oldest -> newest
 }
 export const ATTENDANCE = buildAttendance();
+
+// Volunteer teams for the upcoming Sunday: how many spots each needs vs filled.
+const TEAM_DEFS = [
+  { team: "Kids Ministry", need: 18 },
+  { team: "Greeters", need: 8 },
+  { team: "Worship", need: 12 },
+  { team: "Parking", need: 6 },
+  { team: "Production / AV", need: 5 },
+  { team: "Coffee & Hospitality", need: 7 },
+  { team: "Prayer Team", need: 6 },
+];
+const ROLES_BY_TEAM = {
+  "Kids Ministry": ["Nursery lead", "Elementary teacher", "Check-in host", "Room helper"],
+  Greeters: ["Door greeter", "Info desk"],
+  Worship: ["Vocalist", "Acoustic guitar", "Keys", "Drums"],
+  Parking: ["Lot director", "Golf cart driver"],
+  "Production / AV": ["Sound engineer", "Lyrics / ProPresenter", "Camera"],
+  "Coffee & Hospitality": ["Barista", "Setup", "Cleanup"],
+  "Prayer Team": ["Altar prayer", "Prayer room"],
+};
+export const SERVING = TEAM_DEFS.map(({ team, need }) => {
+  const filled = Math.max(0, need - Math.floor(rand() * (need * 0.5)));
+  const gap = need - filled;
+  const roles = ROLES_BY_TEAM[team];
+  const openRoles = Array.from({ length: gap }, () => ({
+    role: pick(roles),
+    service: rand() < 0.5 ? "9:00 Service" : "11:00 Service",
+  }));
+  return { team, need, filled, gap, openRoles };
+});

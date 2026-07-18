@@ -7,7 +7,7 @@
 // with the org's access token, then have createClient() return it when a token
 // is present. Tool code stays identical.
 
-import { FUNDS, DONATIONS, PEOPLE, ATTENDANCE, SERVICES, ORG } from "./mockData.js";
+import { FUNDS, DONATIONS, PEOPLE, ATTENDANCE, SERVICES, SERVING, ORG } from "./mockData.js";
 
 const delay = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -40,6 +40,11 @@ function demoClient() {
     async attendance({ weeks = 52 } = {}) {
       await delay(200);
       return { services: SERVICES, weeks: ATTENDANCE.slice(-weeks) };
+    },
+
+    async serving() {
+      await delay(180);
+      return SERVING;
     },
   };
 }
