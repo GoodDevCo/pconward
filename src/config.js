@@ -1,7 +1,7 @@
 // ── Brand / global config ──────────────────────────────────────────────
 // Change BRAND in one place to rebrand the whole site.
 export const BRAND = {
-  name: "PCOnward",
+  name: "PCO Go",
   tagline: "The marketplace for Planning Center tools",
   blurb:
     "Reports, apps, and integrations that make Planning Center do more. Install a tool in one click, or build your own and sell it here.",

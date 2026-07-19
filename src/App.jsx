@@ -84,8 +84,7 @@ function Header({ view, go, session, onConnect }) {
     <header className="hdr">
       <div className="hdr-in">
         <div className="brand" onClick={() => go("market")}>
-          <span className="brand-mk"><Store size={17} /></span>
-          <span>PC<b>Onward</b></span>
+          <img className="brand-logo" src="/logo.png" alt="PCO Go" />
         </div>
         <nav className="nav">
           <a className={view.name === "market" ? "on" : ""} onClick={() => go("market")}>Marketplace</a>
